@@ -1,9 +1,9 @@
-const ToDoItem = () => {
+const TodoItem = ({ todo }) => {
   return (
-    <li>
-      Hit the gym <span className="close"></span>
+    <li className={todo.done === "true" ? "checked" : ""}>
+      {todo.title} <span className="close">x</span>
     </li>
-  );
-};
+  )
+}
 
-export default ToDoItem;
+export default TodoItem
