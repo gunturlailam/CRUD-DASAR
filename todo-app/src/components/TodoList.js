@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import TodoItem from "./TodoItem"
 
-const TodoList = () => {
+const TodoList = ({isRefresh, setRefresh}) => {
     const [todos, setTodos] = useState([])
 
     useEffect(() => {
@@ -11,6 +11,7 @@ const TodoList = () => {
                 return res.json();
             })
             .then((data) => {
+                setRefresh(false)
                 // ketika REST API sukses, simpan data dari response ke dalam state lokal
                 setTodos(data)
             })
@@ -19,7 +20,7 @@ const TodoList = () => {
                     console.log("fetch aborted.")
                 }
             })
-    }, [])
+    }, [isRefresh, setRefresh])
 
     return (
         <ul id="todo-list">
