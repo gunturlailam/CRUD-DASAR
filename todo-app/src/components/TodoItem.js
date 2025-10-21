@@ -1,9 +1,26 @@
-const TodoItem = ({ todo }) => {
-  return (
-    <li className={todo.done === "true" ? "checked" : ""}>
-      {todo.title} <span className="close">x</span>
-    </li>
-  )
-}
+const TodoItem = ({ todo, setRefresh }) => {
 
-export default TodoItem
+  const updateTodo = () => {
+    todo.done = !todo.done
+
+    fetch("http://localhost:8000/todos/" + todo.id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(todo)
+    }).then(() => {
+      console.log('todo updated.')
+      setRefresh(true)
+    })
+  }
+
+  return (
+    <li className={`${todo.done ? "checked" : ""}`}>
+      <div onClick={updateTodo}>{todo.title}</div> 
+      <span className="close">x</span>
+    </li>
+  );
+};
+
+export default TodoItem;

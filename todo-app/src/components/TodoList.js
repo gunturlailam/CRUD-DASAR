@@ -26,7 +26,7 @@ const TodoList = ({isRefresh, setRefresh}) => {
         <ul id="todo-list">
             {
                 todos.map((todo) => (
-                    <TodoItem todo={todo} key={todo.id}/>
+                    <TodoItem todo={todo} key={todo.id} setRefresh={setRefresh}/>
                 ))
             }
         </ul>
