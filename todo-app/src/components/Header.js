@@ -7,7 +7,7 @@ const Header = ({setRefresh}) => {
     const addTodo = () => {
         // Validasi input tidak boleh kosong
         if (!title.trim()) {
-            alert('Please enter a todo title!')
+            alert('Silakan masukkan judul tugas!')
             return
         }
 
@@ -26,28 +26,32 @@ const Header = ({setRefresh}) => {
                 setRefresh(true)
 
                 setTimeout(() => {
-                    alert('New todo added successfully!')
+                    alert('Tugas baru berhasil ditambahkan!')
                 }, 500)
             } else {
-                alert('Failed to add todo. Please try again.')
+                alert('Gagal menambah tugas. Silakan coba lagi.')
             }
         }).catch((error) => {
             console.error('Error adding todo:', error)
-            alert('Error adding todo. Please check your connection.')
+            alert('Terjadi kesalahan. Periksa koneksi internet Anda.')
         })
     }
 
     return(
         <div id="todo-header" className="header">
-            <h2>Simple Todo App</h2>
-            <input 
-                type="text" 
-                value={title} 
-                onChange={(e) => setTitle(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && addTodo()}
-                placeholder="Enter todo title..."
-            />
-            <span className="add-button" onClick={addTodo}>Add</span>
+            <h2>✨ Daftar Tugas Keren</h2>
+            <div className="input-container">
+                <input 
+                    type="text" 
+                    value={title} 
+                    onChange={(e) => setTitle(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && addTodo()}
+                    placeholder="Apa yang perlu dikerjakan?"
+                />
+                <button className="add-button" onClick={addTodo}>
+                    Tambah
+                </button>
+            </div>
         </div>
     )
 }
